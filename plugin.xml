@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="cordova-plugin-custombrowser"
+    version="1.0.0">
+    <name>cordova-plugin-custombrowser</name>
+    <description>Plugin to launch custom browser views in supported platforms</description>
+    <author>agathver</author>
+    <license>MIT</license>
+    <keywords>cordova plugin, browser</keywords>
+    <repo>https://github.com/agathver/cordova-plugin-custombrowser.git</repo>
+    <issue>https://github.com/agathver/cordova-plugin-custombrowser/issues</issue>
+
+    <engines>
+        <engine name="cordova" version=">=6.0.0"/>
+        <engine name="cordova-android" version=">=5.0.0"/>
+        <!-- <engine name="cordova-ios" version=">=4.0.0"/> -->
+        <engine name="android-sdk" version=">=16" />
+        <!-- <engine name="apple-ios" version=">=8.0" /> -->
+    </engines>
+
+    <js-module src="www/CustomBrowserPlugin.js" name="CustomBrowserPlugin">
+      <clobbers target="cordova.CustomBrowser" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="CustomBrowserPlugin">
+          <param name="android-package" value="in.amitosh.custombrowser.CustomBrowserPlugin" />
+        </feature>
+      </config-file>
+      <source-file src="src/android/CustomBrowserPlugin.java" target-dir="src/in/amitosh/custombrowser" />
+       <framework src="com.android.support:customtabs:27.1.1"/>
+      <!--resource-file src="path/to/resource/file" target="target/to/resource.file" /-->
+    </platform>
+</plugin>

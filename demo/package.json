@@ -1,0 +1,25 @@
+{
+    "name": "custombrowserdemo",
+    "displayName": "Custom Browser Demo",
+    "version": "1.0.0",
+    "description": "A sample Apache Cordova application for custombrowser plugin",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Amitosh Swain Mahapatra <amitosh.swain@gmail.com>",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "cordova-android": "^7.0.0",
+        "cordova-plugin-whitelist": "^1.3.3"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-custombrowser": {}
+        },
+        "platforms": [
+            "android"
+        ]
+    }
+}
