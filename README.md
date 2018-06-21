@@ -4,6 +4,50 @@ This plugin provides an interface to customizable in-app browser tabs that exist
 
 Currently supports only Android.
 
+# Usage
+
+```js
+
+// Checks if custom browser functionality is available. Callback value is true
+// if any browser installed on the device supports the custom tab protocol,
+// false if otherwise.
+//
+// NOTE: You should always check if the functionality is available on the user
+// device. The library does not fallback to a default implementation. It is left
+// to the developer to fallback using an in-app browser, or the system browser.
+cordova.CustomBrowser.available(function (result) {
+    console.log(result ? 'Supported' : 'Not supported');
+});
+
+const options = {
+    // Primary color for tab toolbar
+    // accepts a value in HTML color notation: #rrggbb
+    toolbarColor: '#000000',
+
+    // Secondary (text) color for tab toolbar
+    // accepts a value in HTML color notation: #rrggbb
+    secondaryToolbarColor: '#ffffff',
+
+    // If true, shows a default share menu item. Defaults to false
+    showShareMenuItem: false,
+
+    // If true shows page title. Defaults to true
+    showTitle: true,
+
+    // If true, hides the URL barwhen the user scrolls down the page content.
+    // Defaults to false
+    enableUrlHiding: false,
+};
+
+cordova.CustomBrowser.open(document.getElementById('url').value, options, function () {
+    console.log('Success');
+}, function(err) {
+    console.error(err);
+});
+```
+
+# LICENSE
+
 Copyright 2018 Amitosh Swain Mahapatra. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except

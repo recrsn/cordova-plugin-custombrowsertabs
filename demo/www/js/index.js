@@ -18,37 +18,33 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+    initialize: function () {
         document.getElementById('open-browser').addEventListener('click', this.openBrowser.bind(this));
+        document.getElementById('available').addEventListener('click', this.checkAvailability.bind(this));
     },
 
-    openBrowser: function() {
-        cordova.CustomBrowser.open('https://www.google.com', function () {
+    openBrowser: function () {
+        var options = {
+            toolbarColor: document.getElementById('toolbarColor').value,
+            secondaryToolbarColor: document.getElementById('secondaryToolbarColor').value,
+            showShareMenuItem: document.getElementById('showShareMenuItem').checked,
+            showTitle: document.getElementById('showTitle').checked,
+            enableUrlHiding: document.getElementById('enableUrlHiding').checked,
+        };
+
+        cordova.CustomBrowser.open(document.getElementById('url').value, options, function () {
             console.log('Success');
-        }, function() {
-            console.log('Failure');
+        }, function (err) {
+            console.error(err);
         });
     },
 
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
-
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+    checkAvailability: function () {
+        cordova.CustomBrowser.available(function (result) {
+            alert(result ? 'Supported' : 'Not supported');
+        }, function (err) {
+            console.error(err);
+        });
     }
 };
 

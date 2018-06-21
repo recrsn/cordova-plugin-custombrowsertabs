@@ -31,7 +31,7 @@
         </feature>
       </config-file>
       <source-file src="src/android/CustomBrowserPlugin.java" target-dir="src/in/amitosh/custombrowser" />
-       <framework src="com.android.support:customtabs:27.1.1"/>
+       <framework src="com.android.support:customtabs:25.1.0+"/>
       <!--resource-file src="path/to/resource/file" target="target/to/resource.file" /-->
     </platform>
 </plugin>

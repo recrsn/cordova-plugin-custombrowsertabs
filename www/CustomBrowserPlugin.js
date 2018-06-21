@@ -17,9 +17,18 @@ var PLUGIN_NAME = 'CustomBrowserPlugin';
 
 var CustomBrowserPlugin = {
   open: function(url, options, successCallBack , failureCallback) {
+
+    if(cordova.platformId !== 'android') {
+      return failureCallback(new Error('Not supported'));
+    }
+
     exec(successCallBack, failureCallback, PLUGIN_NAME, 'open', [url, options]);
   },
   available: function(successCallBack , failureCallback) {
+    if(cordova.platformId !== 'android') {
+      return successCallBack(false);
+    }
+
     exec(successCallBack, failureCallback, PLUGIN_NAME, 'available', []);
   }
 };

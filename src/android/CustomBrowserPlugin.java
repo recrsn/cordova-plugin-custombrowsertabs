@@ -17,6 +17,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.customtabs.CustomTabsService;
@@ -29,6 +30,7 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Iterator;
 import java.util.List;
@@ -48,7 +50,7 @@ public class CustomBrowserPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         switch (action) {
             case "open":
-                this.open(args.getString(0), callbackContext);
+                this.open(args, callbackContext);
                 return true;
             case "available":
                 this.available(callbackContext);
@@ -58,15 +60,44 @@ public class CustomBrowserPlugin extends CordovaPlugin {
         }
     }
 
-    private void open(String url, CallbackContext callbackContext) {
+    private void open(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        String url = args.getString(0);
+
         if (url == null || url.isEmpty()) {
             callbackContext.error("Expected a valid URI");
             return;
         }
 
+        boolean showShareMenuItem = false;
+        String toolbarColor = "#000000";
+        String secondaryToolbarColor = "#ffffff";
+        boolean enableUrlHiding = false;
+        boolean showTitle = true;
+
+        JSONObject options = args.optJSONObject(1);
+
+        if (options != null) {
+            toolbarColor = options.optString("toolbarColor", toolbarColor);
+            secondaryToolbarColor = options.optString("secondaryToolbarColor", secondaryToolbarColor);
+            showShareMenuItem = options.optBoolean("showShareMenuItem");
+            enableUrlHiding = options.optBoolean("enableUrlHiding");
+            showTitle = options.optBoolean("showTitle");
+        }
 
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
-                .addDefaultShareMenuItem();
+                .setShowTitle(showTitle)
+                .setToolbarColor(Color.parseColor(toolbarColor))
+                .setSecondaryToolbarColor(Color.parseColor(secondaryToolbarColor));
+
+        if (showShareMenuItem) {
+            builder.addDefaultShareMenuItem();
+        }
+
+        if (enableUrlHiding) {
+            builder.enableUrlBarHiding();
+        }
+
+
         CustomTabsIntent customTabsIntent = builder.build();
 
         try {
