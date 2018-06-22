@@ -1,10 +1,19 @@
-# cordova-plugin-custombrowser
+# cordova-plugin-custombrowsertabs
 
 This plugin provides an interface to customizable in-app browser tabs that exist on some mobile platforms, specifically Custom Tabs on Android.
 
 Currently supports only Android.
 
-# Usage
+## Installation
+
+```
+npm install cordova-plugin-custombrowsertabs
+```
+
+This library depends on [com.android.support:customtabs:25.1.0+](https://developer.android.com/topic/libraries/support-library/packages#custom-tabs). If you are using any other plugin that utilized support libraries, make sure that they use the same library version. If you get build failures, try using [cordova-android-support-gradle-release](https://github.com/dpa99c/cordova-android-support-gradle-release) plugin to align all support library versions.
+
+
+## Usage
 
 ```js
 
@@ -46,7 +55,7 @@ cordova.CustomBrowser.open(document.getElementById('url').value, options, functi
 });
 ```
 
-# LICENSE
+## LICENSE
 
 Copyright 2018 Amitosh Swain Mahapatra. All Rights Reserved.
 

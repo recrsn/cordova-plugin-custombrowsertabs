@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-custombrowser",
+  "name": "cordova-plugin-custombrowsertabs",
   "version": "0.0.1",
   "cordova": {
     "id": "my-cordova-plugin",
@@ -18,10 +18,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agathver/cordova-plugin-custombrowser.git"
+    "url": "git+https://github.com/agathver/cordova-plugin-custombrowsertabs.git"
   },
   "bugs": {
-    "url": "https://github.com/agathver/cordova-plugin-custombrowser/issues"
+    "url": "https://github.com/agathver/cordova-plugin-custombrowsertabs/issues"
   },
-  "homepage": "https://github.com/agathver/cordova-plugin-custombrowser#readme"
+  "homepage": "https://github.com/agathver/cordova-plugin-custombrowsertabs#readme"
 }
